@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDebounce } from "./useDebounce";
+import {
+  loadListFromStorage,
+  saveListToStorage,
+} from "../helper/ayncStore.helper";
 
 export interface ToDoListItem {
-  id: number; // string;
+  id: string;
   name: string;
   isChecked: boolean;
 }
 
 const useTodoList = (initialList: ToDoListItem[] = []) => {
   const [list, setList] = useState<ToDoListItem[]>(initialList);
-  const [idCount, setIdCount] = useState(initialList.length || 0);
+
+  useEffect(() => {
+    loadListFromStorage(setList);
+  }, []);
+
+  const saveListDebounced = useDebounce(saveListToStorage, 500); // 500ms delay
+
+  useEffect(() => {
+    saveListDebounced(list);
+  }, [list]);
 
   const addItem = (item: ToDoListItem) => {
     setList((prevList) => [...prevList, item]);
-    setIdCount(idCount + 1);
   };
 
   const removeItem = (itemId: ToDoListItem["id"]) => {
@@ -35,7 +48,6 @@ const useTodoList = (initialList: ToDoListItem[] = []) => {
     addItem,
     removeItem,
     updateItem,
-    idCount,
   };
 };
 

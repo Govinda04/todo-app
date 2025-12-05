@@ -2,40 +2,35 @@ import { View, FlatList, StyleSheet, Text, Button } from "react-native";
 import React from "react";
 import TodoItem from "./TodoItem";
 import useTodoList, { ToDoListItem } from "../hooks/useTodoList";
+import { getUniqueId } from "../helper/common.helper";
 
-const _dummyListData: ToDoListItem[] = [
-  {
-    id: 1,
-    name: "do task 1",
-    isChecked: true,
-  },
-  {
-    id: 2,
-    name: "do task 2",
-    isChecked: false,
-  },
-  {
-    id: 3,
-    name: "",
-    isChecked: false,
-  },
-];
+// const _dummyListData: ToDoListItem[] = [
+//   {
+//     id: 1,
+//     name: "do task 1",
+//     isChecked: true,
+//   },
+//   {
+//     id: 2,
+//     name: "do task 2",
+//     isChecked: false,
+//   },
+//   {
+//     id: 3,
+//     name: "",
+//     isChecked: false,
+//   },
+// ];
 
 const TodoList = () => {
-  const {
-    list: _listData,
-    updateItem,
-    addItem,
-    removeItem,
-    idCount,
-  } = useTodoList(_dummyListData);
+  const { list: _listData, updateItem, addItem, removeItem } = useTodoList();
 
   const handleUpdateItem = (item: ToDoListItem) => {
     updateItem(item.id, item);
   };
   const handleAddItem = () => {
     addItem({
-      id: idCount + 1,
+      id: getUniqueId(),
       name: "",
       isChecked: false,
     });
@@ -55,13 +50,17 @@ const TodoList = () => {
   };
   return (
     <View style={styles.container}>
+      <Button onPress={handleAddItem} title="+ Add an Item" />
       <FlatList
         data={_listData}
         renderItem={_renderItem}
         keyExtractor={({ id }) => `to-do-item-${id}`}
+        style={{
+          paddingBottom: 40,
+          marginBottom: 10,
+        }}
       />
-      <Button onPress={handleAddItem} title="Add an Item" />
-      <Text>{JSON.stringify(_listData, null, 2)}</Text>
+      {/* <Text>{JSON.stringify(_listData, null, 2)}</Text> */}
     </View>
   );
 };
@@ -70,6 +69,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 20,
+    paddingBottom: 40,
   },
 });
 

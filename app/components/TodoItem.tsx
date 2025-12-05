@@ -43,7 +43,7 @@ const TodoItem = ({
           <TodoInput value={name} handleItemTxtChange={handleItemTxtChange} />
         </View>
         <TouchableOpacity onPress={handleRemoveItem} activeOpacity={0.4}>
-          <CancelIcon />
+          <CancelIcon color="#33b1f0" />
         </TouchableOpacity>
       </View>
     </View>
