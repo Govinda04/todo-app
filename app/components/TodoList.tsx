@@ -1,8 +1,8 @@
-import { View, FlatList, StyleSheet, Text, Button } from "react-native";
 import React from "react";
-import TodoItem from "./TodoItem";
-import useTodoList, { ToDoListItem } from "../hooks/useTodoList";
+import { Button, FlatList, StyleSheet, View } from "react-native";
 import { getUniqueId } from "../helper/common.helper";
+import useTodoList, { ToDoListItem } from "../hooks/useTodoList";
+import TodoItem from "./TodoItem";
 
 // const _dummyListData: ToDoListItem[] = [
 //   {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     paddingTop: 20,
-    paddingBottom: 40,
+    paddingBottom: 100,
   },
 });
 
