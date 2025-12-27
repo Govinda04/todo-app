@@ -8,12 +8,15 @@
       "distribution": "internal"
     },
     "preview": {
-      "distribution": "internal"
+      "channel": "preview",
+      "distribution": "internal",
+      "android": { "buildType": "apk" }
     },
     "production": {
       // This remains the default for the Play Store (AAB)
     },
     "apk_release": {
+      "channel": "apk_release",
       "android": {
         "buildType": "apk"
       },

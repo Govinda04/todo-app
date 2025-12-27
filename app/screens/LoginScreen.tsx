@@ -1,3 +1,4 @@
+import { updateId } from "expo-updates";
 import React, { useState } from "react";
 import {
   Alert,
@@ -54,6 +55,8 @@ const LoginScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+
+        <Text style={styles.updateId}>{updateId}</Text>
       </View>
     </Wrapper>
   );
@@ -110,6 +113,11 @@ const styles = StyleSheet.create({
     width: 100,
     fontWeight: "semibold",
     letterSpacing: 1.3,
+  },
+  updateId: {
+    position: "absolute",
+    bottom: 0,
+    alignSelf: "flex-end",
   },
 });
 
